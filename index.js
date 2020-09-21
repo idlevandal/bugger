@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 
 const app = express();
 const bugRoute = require('./routes/bug.route');
+const userRoute = require('./routes/user.route');
 
 const PORT = process.env.PORT || 5000;
 
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/bugs', bugRoute);
+app.use('/users', userRoute);
 
 // handle undefined routes
 app.all('*', (req, res, next) => {

@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.route('/')
     .get(authController.protect, bugContoller.getBugs)
-    .post(bugContoller.createBug);
+    .post(authController.protect, bugContoller.createBug);
 
 module.exports = router;
