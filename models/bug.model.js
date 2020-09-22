@@ -22,6 +22,12 @@ const bugSchema = mongoose.Schema({
     actualResult: {
         type: String
     },
+    severity: {
+        type: String,
+        enum: ['low', 'minor', 'major', 'critical'],
+        required: true,
+        default: 'low'
+    },
     url: {
         type: String,
         lowercase: true
