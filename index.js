@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const enforce = require('express-sslify');
 require('dotenv').config();
 
 const connectDB = require('./config/db');
@@ -12,6 +13,7 @@ const userRoute = require('./routes/user.route');
 const PORT = process.env.PORT || 5000;
 
 app.use(helmet());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(cors());
 app.use(express.json());
 
