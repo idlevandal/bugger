@@ -13,7 +13,9 @@ const userRoute = require('./routes/user.route');
 const PORT = process.env.PORT || 5000;
 
 app.use(helmet());
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+if (process.env.NODE_ENV !== 'development') {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
 app.use(cors());
 app.use(express.json());
 
