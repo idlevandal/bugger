@@ -1,10 +1,9 @@
 const nodemailer = require('nodemailer');
 
 const sendEmail = async options => {
-    console.log(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
     // 1) create a transporter
     const transporter = nodemailer.createTransport({
-        service: 'SendGrid',
+        service: 'Gmail',
             auth: {
                 user: process.env.SENDGRID_USERNAME,
                 pass: process.env.SENDGRID_PASSWORD
@@ -20,7 +19,6 @@ const sendEmail = async options => {
         text: options.message
         // html:
     }
-    console.log('ma', mailOptions);
     // 3) Actually send the email
     await transporter.sendMail(mailOptions);
 };
