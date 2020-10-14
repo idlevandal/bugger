@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const bugSchema = mongoose.Schema({
     title: {
@@ -10,7 +11,7 @@ const bugSchema = mongoose.Schema({
         required: true
     },
     reporter: {
-        type: String,
+        type: Schema.Types.ObjectId,
         required: true
     },
     stepsToReproduce: {
@@ -35,8 +36,7 @@ const bugSchema = mongoose.Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: Date.now,
-        select: false
+        default: Date.now
     },
 });
 

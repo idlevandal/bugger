@@ -73,6 +73,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     
     try {
         // const resetUrl = `${req.protocol}://${req.get('host')}/api/v1/resetPassword/${resetToken}`;
+        // hard code https, req.protocol is returning http when using heroku
         const resetUrl = `https://${req.get('host')}/users/resetPassword/${resetToken}`;
         // await new Email(user, resetUrl).sendPasswordReset();
         await sendEmail({

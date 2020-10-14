@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 const app = express();
 const bugRoute = require('./routes/bug.route');
 const userRoute = require('./routes/user.route');
+const AppError = require('./utils/appError');
 
 const PORT = process.env.PORT || 5000;
 
