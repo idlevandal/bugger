@@ -16,7 +16,7 @@ exports.login = catchAsync(async (req, res, next) => {
     const user = await User.findOne({email}).select('+password');
 
     if (!user || !await user.correctPassword(password, user.password)) {
-        return next(new AppError('Incorrect email or password', 401));
+        return next(new AppError('Incorrect email or password', 400));
     }
 
     const token = await jwt.sign({id: user._id}, process.env.JWT_SECRET, {
@@ -108,9 +108,15 @@ exports.protect = catchAsync(async (req, res, next) => {
     // } else if (req.cookies && req.cookies.jwt) {
     //     token = req.cookies.jwt;
     // }
+    
     if (!token) return next(new AppError('You are not logged in!', 401));
 
-    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    let decoded;
+    try {
+        decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+        return next(new AppError('Invalid token!', 401));
+    }
     // const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     const currentUser = await User.findById(decoded.id);
