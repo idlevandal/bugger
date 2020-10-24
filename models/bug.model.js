@@ -12,6 +12,7 @@ const bugSchema = mongoose.Schema({
     },
     reporter: {
         type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     stepsToReproduce: {

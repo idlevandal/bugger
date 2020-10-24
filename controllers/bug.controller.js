@@ -3,7 +3,10 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
 exports.getBugs = async (req, res) => {
-    const bugs = await Bug.find().lean();
+    const bugs = await Bug.find().lean().populate({
+        path: 'reporter',
+        select: 'name -_id'
+    });
 
     res.status(200).json({
         status: 'success',
